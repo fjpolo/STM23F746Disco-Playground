@@ -1,0 +1,7 @@
+// scope.c
+
+#include "stm32f4xx_hal.h"
+
+#define SCOPE_INV_TRIGGER	0xFFFFFFFF
+
+uint32_t ScopeFindTrigger (uint32_t triggerEdge, short triggerLevel, short* pData, uint32_t numberOfSamples);
