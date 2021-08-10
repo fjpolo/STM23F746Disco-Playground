@@ -1,0 +1,5 @@
+qf_ps.cpp:89:6:static void QP::QF::psInit(QP::QSubscrList*, enum_t)	0	static
+qf_ps.cpp:119:6:static void QP::QF::publish_(const QP::QEvt*)	32	static,ignoring_inline_asm
+qf_ps.cpp:204:6:void QP::QActive::subscribe(enum_t) const	8	static,ignoring_inline_asm
+qf_ps.cpp:248:6:void QP::QActive::unsubscribe(enum_t) const	8	static,ignoring_inline_asm
+qf_ps.cpp:293:6:void QP::QActive::unsubscribeAll() const	24	static,ignoring_inline_asm

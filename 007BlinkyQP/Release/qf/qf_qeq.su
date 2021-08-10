@@ -1,0 +1,5 @@
+qf_qeq.cpp:58:1:QP::QEQueue::QEQueue()	0	static
+qf_qeq.cpp:84:6:void QP::QEQueue::init(const QP::QEvt**, uint_fast16_t)	8	static
+qf_qeq.cpp:122:6:bool QP::QEQueue::post(const QP::QEvt*, uint_fast16_t, uint_fast8_t)	8	static,ignoring_inline_asm
+qf_qeq.cpp:221:6:void QP::QEQueue::postLIFO(const QP::QEvt*, uint_fast8_t)	8	static,ignoring_inline_asm
+qf_qeq.cpp:287:13:const QP::QEvt* QP::QEQueue::get(uint_fast8_t)	8	static,ignoring_inline_asm

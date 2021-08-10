@@ -1,0 +1,4 @@
+qk_port.cpp:74:6:void QK_init()	0	static
+qk_port.cpp:133:6:void PendSV_Handler()	0	static,ignoring_inline_asm
+qk_port.cpp:194:6:void QK_thread_ret()	0	static,ignoring_inline_asm
+qk_port.cpp:236:6:void NMI_Handler()	0	static,ignoring_inline_asm
