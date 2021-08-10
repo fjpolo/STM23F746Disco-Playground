@@ -1,0 +1,5 @@
+qf_mem.cpp:63:1:QP::QMPool::QMPool()	0	static
+qf_mem.cpp:103:6:void QP::QMPool::init(void*, uint_fast32_t, uint_fast16_t)	24	static
+qf_mem.cpp:174:6:void QP::QMPool::put(void*, uint_fast8_t)	8	static,ignoring_inline_asm
+qf_mem.cpp:224:7:void* QP::QMPool::get(uint_fast16_t, uint_fast8_t)	8	static,ignoring_inline_asm
+qf_mem.cpp:303:20:static uint_fast16_t QP::QF::getPoolMin(uint_fast8_t)	8	static,ignoring_inline_asm
