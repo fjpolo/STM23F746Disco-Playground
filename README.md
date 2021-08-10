@@ -18,6 +18,7 @@ STM32F746 DISCOVERY projects using STMCubeIDE+STMCubeMX.
 ✔ UARTprintf
 ✖ UARTprintfRTOS
 ✔ BlinkyQP
+✔ ButtonBlinkyQP
 
 # Libraries
 - BSP
