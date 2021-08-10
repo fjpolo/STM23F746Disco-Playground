@@ -1,0 +1,4 @@
+freertos.cpp:142:6:void StartDefaultTask(void*)	8	static
+freertos.cpp:161:6:void StartBlinkyTask(void*)	8	static
+freertos.cpp:94:6:void MX_FREERTOS_Init()	8	static
+freertos.cpp:186:6:void StartDebugTask(void*)	8	static
