@@ -1,0 +1,10 @@
+qf_time.cpp:81:6:static void QP::QF::tickX_(uint_fast8_t)	16	static,ignoring_inline_asm
+qf_time.cpp:206:6:static bool QP::QF::noTimeEvtsActiveX(uint_fast8_t)	0	static
+qf_time.cpp:231:1:QP::QTimeEvt::QTimeEvt(QP::QActive*, enum_t, uint_fast8_t)	16	static
+qf_time.cpp:268:1:QP::QTimeEvt::QTimeEvt()	0	static
+qf_time.cpp:324:6:void QP::QTimeEvt::armX(QP::QTimeEvtCtr, QP::QTimeEvtCtr)	16	static,ignoring_inline_asm
+qf_time.cpp:400:6:bool QP::QTimeEvt::disarm()	0	static,ignoring_inline_asm
+qf_time.cpp:460:6:bool QP::QTimeEvt::rearm(QP::QTimeEvtCtr)	8	static,ignoring_inline_asm
+qf_time.cpp:541:6:bool QP::QTimeEvt::wasDisarmed()	0	static
+qf_time.cpp:560:13:QP::QTimeEvtCtr QP::QTimeEvt::currCtr() const	0	static,ignoring_inline_asm
+qf_time.cpp:570:1:cpp)	8	static

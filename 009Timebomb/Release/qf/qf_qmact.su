@@ -1,0 +1,9 @@
+qf.hpp:200:18:virtual void QP::QActive::start(uint_fast8_t, const QP::QEvt**, uint_fast16_t, void*, uint_fast16_t)	32	static
+qf.hpp:330:7:QP::QMActive::~QMActive()	8	static
+qf.hpp:330:7:virtual QP::QMActive::~QMActive()	8	static
+qf_qmact.cpp:73:6:virtual void QP::QMActive::init(uint_fast8_t)	0	static
+qf_qmact.cpp:61:1:QP::QMActive::QMActive(QP::QStateHandler)	16	static
+qf_qmact.cpp:82:6:bool QP::QMActive::isInState(const QP::QMState*) const	0	static
+qf_qmact.cpp:86:16:const QP::QMState* QP::QMActive::childStateObj(const QP::QMState*) const	0	static
+qf_qmact.cpp:68:6:virtual void QP::QMActive::init(const void*, uint_fast8_t)	0	static
+qf_qmact.cpp:77:6:virtual void QP::QMActive::dispatch(const QP::QEvt*, uint_fast8_t)	0	static

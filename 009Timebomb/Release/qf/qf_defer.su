@@ -1,0 +1,3 @@
+qf_defer.cpp:77:6:bool QP::QActive::defer(QP::QEQueue*, const QP::QEvt*) const	0	static
+qf_defer.cpp:178:20:uint_fast16_t QP::QActive::flushDeferred(QP::QEQueue*) const	16	static
+qf_defer.cpp:113:6:bool QP::QActive::recall(QP::QEQueue*)	16	static,ignoring_inline_asm

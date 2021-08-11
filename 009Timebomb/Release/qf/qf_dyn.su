@@ -1,0 +1,7 @@
+qf_dyn.cpp:84:6:static void QP::QF::poolInit(void*, uint_fast32_t, uint_fast16_t)	24	static
+qf_dyn.cpp:140:7:static QP::QEvt* QP::QF::newX_(uint_fast16_t, uint_fast16_t, enum_t)	24	static
+qf_dyn.cpp:219:6:static void QP::QF::gc(const QP::QEvt*)	8	static,ignoring_inline_asm
+qf_dyn.cpp:291:13:static const QP::QEvt* QP::QF::newRef_(const QP::QEvt*, const QP::QEvt*)	8	static,ignoring_inline_asm
+qf_dyn.cpp:327:6:static void QP::QF::deleteRef_(const QP::QEvt*)	0	static
+qf_dyn.cpp:345:20:static uint_fast16_t QP::QF::poolGetMaxBlockSize()	0	static
+qf_dyn.cpp:349:1:cpp)	8	static

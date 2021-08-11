@@ -1,0 +1,12 @@
+qep.hpp:282:18:virtual void QP::QHsm::init(uint_fast8_t)	0	static
+qf.hpp:200:18:virtual void QP::QActive::start(uint_fast8_t, const QP::QEvt**, uint_fast16_t, void*, uint_fast16_t)	32	static
+qf.hpp:144:7:QP::QActive::~QActive()	8	static
+qf.hpp:144:7:virtual QP::QActive::~QActive()	8	static
+qk.cpp:78:6:static void QP::QF::init()	16	static
+qk.cpp:111:6:static void QP::QF::stop()	0	static
+qk.cpp:227:14:static QP::QSchedStatus QP::QK::schedLock(uint_fast8_t)	8	static,ignoring_inline_asm
+qk.cpp:329:19:uint_fast8_t QK_sched_()	0	static
+qk.cpp:356:6:void QK_activate_()	40	static,ignoring_inline_asm
+qk.cpp:137:7:static int_t QP::QF::run()	8	static,ignoring_inline_asm
+qk.cpp:173:6:virtual void QP::QActive::start(uint_fast8_t, const QP::QEvt**, uint_fast16_t, void*, uint_fast16_t, const void*)	16	static,ignoring_inline_asm
+qk.cpp:277:6:static void QP::QK::schedUnlock(QP::QSchedStatus)	8	static,ignoring_inline_asm
