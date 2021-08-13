@@ -146,6 +146,9 @@ Q_STATE_DEF(Timebomb, pause) {
         }
         //.${AOs::Timebomb::SM::pause::TIMEOUT}
         case TIMEOUT_SIG: {
+            /*debug*/
+            BSP::debug("%d...", blinkyCounter);
+            /*Decrement counter*/
             --blinkyCounter;
             //.${AOs::Timebomb::SM::pause::TIMEOUT::[blinkyCounter>0]}
             if (blinkyCounter > 0) {
@@ -172,6 +175,8 @@ Q_STATE_DEF(Timebomb, boom) {
         case Q_ENTRY_SIG: {
             /*LED on*/
             QPBSP::ledOn();
+            /*Make it BOOM*/
+            BSP::debug("\r\nBOOM!!!\r\n");
             status_ = Q_RET_HANDLED;
             break;
         }

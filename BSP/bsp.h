@@ -5,6 +5,10 @@
 #include "usart.h"
 #include <stdio.h>
 #include <retarget.h>
+#include "stm32746g_discovery.h"
+#include "stm32746g_discovery_audio.h"
+
+
 
 namespace BSP
 {
@@ -45,6 +49,11 @@ namespace BSP
 	enum GPIOPinState{
 		PinLow = GPIO_PIN_RESET,
 		PinHigh = GPIO_PIN_SET
+	};
+	enum SignalType{
+		Square,
+		Sine,
+		Ramp
 	};
 	/*BSP::LED*/
 	namespace LED
@@ -92,7 +101,48 @@ namespace BSP
 		GPIO_TypeDef* HALport_p;
 	};
 	} // END namespace BUtton
+	/*BSP::Audio*/
+	namespace Audio{
+		/**
+		 * this software builds heavily on the work by https://community.st.com/people/Beaulier.Francois
+		 * Also thanks to https://www.youtube.com/watch?v=O2XaCFsWxSw
+		 **/
 
+		/*Defines*/
+		constexpr uint32_t MY_BUFFER_SIZE_SAMPLES = 1024;
+		constexpr uint32_t MY_DMA_BYTES_PER_FRAME = 8;
+		constexpr uint32_t MY_DMA_BYTES_PER_MSIZE = 2;
+		constexpr uint32_t MY_DMA_BUFFER_SIZE_BYTES = MY_BUFFER_SIZE_SAMPLES * MY_DMA_BYTES_PER_FRAME;
+		constexpr uint32_t MY_DMA_BUFFER_SIZE_MSIZES = MY_DMA_BUFFER_SIZE_BYTES / MY_DMA_BYTES_PER_MSIZE;
+		/*BSP::Audio::classAudio*/
+		class classAudio{
+		public:
+			/*Methods*/
+			classAudio();
+			~classAudio();
+			void NullFill(int16_t* buf, uint32_t num_samples);
+			void SquareFill(int16_t* buf, uint32_t num_samples);
+			void SineFill(int16_t* buf, uint32_t num_samples);
+			void RampFill(int16_t* buf, uint32_t num_samples);
+			void BufferToDMA(int16_t* sampleBuffer, uint8_t* dmaBuffer, uint32_t numSamples);
+			void setVolume(uint8_t _volume);
+			void setFrequency(uint32_t _frequency);
+			uint8_t getVolume()const;
+			uint32_t getFrequency()const;
+			void run(void);
+			void stop(void)const;
+			void setSignalType(SignalType _signalType);
+			SignalType getSignalType()const;
+		private:
+			SignalType signalType;
+			uint32_t samplerate;
+			uint32_t signalFrequency;
+			uint8_t volume;
+			int16_t playbackBuffer[MY_BUFFER_SIZE_SAMPLES]{};
+			uint8_t saiDMATransmitBuffer[MY_DMA_BUFFER_SIZE_BYTES]{};
+		};
+
+	} // END namespace Audio
 	/*** User defined datatypes ***/
 	/*MainData_t*/
 	typedef struct{

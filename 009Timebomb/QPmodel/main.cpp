@@ -16,7 +16,7 @@
 // for more details.
 //
 //.$endhead${.::QPmodel::main.cpp} ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-#include "qpcpp.hpp" // QP/C++ framework API
+b#include "qpcpp.hpp" // QP/C++ framework API
 #include "bsp.hpp"   // Board Support Package interface
 
 using namespace QP;

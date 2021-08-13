@@ -70,7 +70,10 @@ QPBSP::ledOff();
 /*arm the private time event to expire in 1/2s and nonperiodically*/
 m_timeEvt.armX(QPBSP::TICKS_PER_SEC/2,0);</entry>
      <tran trig="TIMEOUT">
-      <action>--blinkyCounter;</action>
+      <action>/*debug*/
+BSP::debug(&quot;%d...&quot;, blinkyCounter);
+/*Decrement counter*/
+--blinkyCounter;</action>
       <choice target="../../../2">
        <guard>blinkyCounter &gt; 0</guard>
        <choice_glyph conn="60,80,4,1,-26,-8">
@@ -79,26 +82,28 @@ m_timeEvt.armX(QPBSP::TICKS_PER_SEC/2,0);</entry>
       </choice>
       <choice target="../../../4">
        <guard brief="else"/>
-       <choice_glyph conn="60,80,4,1,8,-8">
+       <choice_glyph conn="60,80,4,1,23,-8">
         <action box="2,4,10,2"/>
        </choice_glyph>
       </choice>
       <tran_glyph conn="2,80,3,-1,58">
-       <action box="0,-2,14,4"/>
+       <action box="0,-2,37,8"/>
       </tran_glyph>
      </tran>
-     <state_glyph node="2,66,50,16">
+     <state_glyph node="2,66,50,20">
       <entry box="1,2,49,10"/>
      </state_glyph>
     </state>
     <state name="boom">
      <entry>/*LED on*/
-QPBSP::ledOn();</entry>
-     <state_glyph node="2,84,50,15">
+QPBSP::ledOn();
+/*Make it BOOM*/
+BSP::debug(&quot;\r\nBOOM!!!\r\n&quot;);</entry>
+     <state_glyph node="2,99,50,15">
       <entry box="1,2,49,6"/>
      </state_glyph>
     </state>
-    <state_diagram size="76,100"/>
+    <state_diagram size="75,115"/>
    </statechart>
   </class>
   <attribute name="AO_Timebomb" type="QP::QActive * const" visibility="0x00" properties="0x00">
@@ -262,7 +267,7 @@ void Q_onAssert(char const * const module, int loc) {
 </text>
    </file>
    <file name="main.cpp">
-    <text>#include &quot;qpcpp.hpp&quot; // QP/C++ framework API
+    <text>b#include &quot;qpcpp.hpp&quot; // QP/C++ framework API
 #include &quot;bsp.hpp&quot;   // Board Support Package interface
 
 using namespace QP;

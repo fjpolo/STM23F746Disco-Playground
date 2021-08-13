@@ -1,6 +1,9 @@
 #include "bsp.h"
+#include <cmath>
+
 
 UART_HandleTypeDef huart1;
+extern SAI_HandleTypeDef haudio_out_sai;
 
 namespace BSP
 {
@@ -144,6 +147,111 @@ namespace BSP
 	}
 
 	} // END namespace Button
+    /*BSP::Audio*/
+    namespace Audio{
+    	/**/
+    	classAudio::classAudio(){
+    		samplerate = AUDIO_FREQUENCY_48K;
+    		signalFrequency = 100;
+			volume = 10;
+			signalType = BSP::SignalType::Ramp;
+			classAudio::setSignalType(signalType);
+    	}
+    	classAudio::~classAudio(){
+    		HAL_SAI_DMAStop(&haudio_out_sai);
+    	}
+    	void classAudio::NullFill(int16_t* buf, uint32_t num_samples){
+    		for(uint32_t i=0; i<num_samples; ++i){
+				buf[i] = 0;
+			}
+    	}
+    	void classAudio::SquareFill(int16_t* buf, uint32_t num_samples){
+			// Fill up a 100Hz square wave
+			static int togglePeriod = AUDIO_FREQUENCY_48K / (signalFrequency * MY_DMA_BYTES_PER_MSIZE);
+
+			int count = 0;
+			int waveState = 1;
+			int magnitude = 30000;
+			/**/
+			for(uint32_t i=0; i<num_samples;++i){
+				buf[i] = magnitude * waveState;
+				++count;
+				if(count >= togglePeriod){
+					count = 0;
+					waveState = waveState * (-1);
+				}
+			}
+		}
+		void classAudio::SineFill(int16_t* buf, uint32_t num_samples){
+			int magnitude = 30000;
+			for(uint32_t i=0; i<num_samples; ++i){
+				float t = i/static_cast<float>(samplerate);
+				buf[i] =  magnitude * std::sin(2 * M_PI * signalFrequency * t);
+			}
+		}
+		void classAudio::RampFill(int16_t* buf, uint32_t num_samples){
+			int magnitude = 30000;
+			for(uint32_t i=0; i<num_samples; ++i){
+				buf[i] =  magnitude * i/static_cast<float>(num_samples);
+			}
+		}
+		void classAudio::BufferToDMA(int16_t* sampleBuffer, uint8_t* dmaBuffer, uint32_t numSamples){
+			for(uint32_t i=0; i<numSamples;++i){
+				int16_t* p = (int16_t*)&dmaBuffer[i*8]; // samples are spaced 8 bytes apart
+				*p = sampleBuffer[i];
+				*(p+2) = sampleBuffer[i];
+			}
+		}
+		void classAudio::setVolume(uint8_t _volume){
+			volume = _volume;
+		}
+		void classAudio::setFrequency(uint32_t _frequency){
+			signalFrequency = _frequency;
+		}
+		uint8_t classAudio::getVolume()const{
+			return volume;
+		}
+		uint32_t classAudio::getFrequency()const{
+			return signalFrequency;
+		}
+		void classAudio::run(void){
+			classAudio::BufferToDMA(playbackBuffer, saiDMATransmitBuffer, BSP::Audio::MY_BUFFER_SIZE_SAMPLES);
+			BSP_AUDIO_OUT_Init(OUTPUT_DEVICE_HEADPHONE, volume, samplerate);
+    		HAL_SAI_Transmit_DMA(&haudio_out_sai, (uint8_t*)saiDMATransmitBuffer, BSP::Audio::MY_DMA_BUFFER_SIZE_MSIZES);
+		}
+		void classAudio::stop(void)const{
+			HAL_SAI_DMAStop(&haudio_out_sai);
+		}
+		void classAudio::setSignalType(SignalType _signalType){
+			signalType = _signalType;
+			switch(signalType){
+				case BSP::SignalType::Square:
+				{
+					classAudio::SquareFill(playbackBuffer, BSP::Audio::MY_BUFFER_SIZE_SAMPLES);
+					break;
+				}
+				case BSP::SignalType::Sine:
+				{
+					classAudio::SineFill(playbackBuffer, BSP::Audio::MY_BUFFER_SIZE_SAMPLES);
+					break;
+				}
+				case BSP::SignalType::Ramp:
+				{
+					classAudio::RampFill(playbackBuffer, BSP::Audio::MY_BUFFER_SIZE_SAMPLES);
+					break;
+				}
+				default:
+				{
+					classAudio::NullFill(playbackBuffer, BSP::Audio::MY_BUFFER_SIZE_SAMPLES);
+					break;
+				}
+			}
+		}
+		SignalType classAudio::getSignalType()const{
+			return signalType;
+		}
+
+    } // END namespace Audio
     /*** Standalone functions ***/
     /*BSP::Init(...)*/
     void Init(MainData_t* mainData_){
